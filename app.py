@@ -2,7 +2,8 @@ import os
 import shutil
 import subprocess
 
-def copiar_e_registrar_dll(nome_dll, pasta_destino):
+
+def copiar_dll(nome_dll, pasta_destino):
     caminho = os.path.join(pasta_destino, nome_dll)
 
     if not os.path.exists(caminho):
@@ -11,8 +12,13 @@ def copiar_e_registrar_dll(nome_dll, pasta_destino):
     else:
         print(f'O arquivo {nome_dll} ja existe na pasta {pasta_destino}')
 
+
+def registrar_dll(nome_dll, pasta_destino):
+    caminho = os.path.join(pasta_destino, nome_dll)
+
     subprocess.run(["regsvr32", "/s", caminho], check=True)
     print(f'O arquivo {nome_dll} foi registrado')
+
 
 def main():
     sistema_64x = os.path.join(os.environ['WINDIR'], "SysWOW64")
@@ -20,16 +26,18 @@ def main():
 
     if os.path.exists(sistema_64x):
         pasta_destino_dll = sistema_64x
-        print("*** Sistema 64 bits detectado ***")
+        print('*** Sistema 64 bits detectado ***\n')
     else:
         pasta_destino_dll = sistema_32x
-        print("*** Sistema 32 bits detectado ***")
+        print('*** Sistema 32 bits detectado ***\n')
 
     dlls = ["capicom.dll", "msxml5.dll", "msxml5r.dll"]
     for dll in dlls:
-        copiar_e_registrar_dll(dll, pasta_destino_dll)
-    
-    print("*** CAPICOM e MSXML5 instalados ***")
+        copiar_dll(dll, pasta_destino_dll)
+        if dll != "msxml5r.dll":
+            registrar_dll(dll, pasta_destino_dll)
+
+    print('\n*** CAPICOM e MSXML5 instalados ***\n')
     os.system("PAUSE")
 
 if __name__ == "__main__":
