@@ -17,7 +17,7 @@ def registrar_dll(nome_dll, pasta_destino):
     caminho = os.path.join(pasta_destino, nome_dll)
 
     subprocess.run(["regsvr32", "/s", caminho], check=True)
-    print(f'O arquivo {nome_dll} foi registrado')
+    print(f'O arquivo {nome_dll} foi registrado\n')
 
 
 def main():
@@ -36,6 +36,8 @@ def main():
         copiar_dll(dll, pasta_destino_dll)
         if dll != "msxml5r.dll":
             registrar_dll(dll, pasta_destino_dll)
+        else:
+            print(f'O arquivo {dll} nao precisa de registro')
 
     print('\n*** CAPICOM e MSXML5 instalados ***\n')
     os.system("PAUSE")
