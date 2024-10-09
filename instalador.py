@@ -19,14 +19,14 @@ def registrar_dll(nome_dll, pasta_destino):
 
 
 def main():
-    sistema_64x = os.path.join(os.environ['WINDIR'], "SysWOW64")
-    sistema_32x = os.path.join(os.environ['WINDIR'], "System32")
+    sistema_x64 = os.path.join(os.environ['WINDIR'], "SysWOW64")
+    sistema_x32 = os.path.join(os.environ['WINDIR'], "System32")
 
-    if os.path.exists(sistema_64x):
-        pasta_destino_dll = sistema_64x
+    if os.path.exists(sistema_x64):
+        pasta_destino_dll = sistema_x64
         print('*** Sistema 64 bits detectado ***\n')
     else:
-        pasta_destino_dll = sistema_32x
+        pasta_destino_dll = sistema_x32
         print('*** Sistema 32 bits detectado ***\n')
 
     dlls = ["capicom.dll", "msxml5.dll", "msxml5r.dll"]
