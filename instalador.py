@@ -1,6 +1,5 @@
 import os
 import shutil
-import subprocess
 
 
 def copiar_dll(nome_dll, pasta_destino):
@@ -15,8 +14,7 @@ def copiar_dll(nome_dll, pasta_destino):
 
 def registrar_dll(nome_dll, pasta_destino):
     caminho = os.path.join(pasta_destino, nome_dll)
-
-    subprocess.run(["regsvr32", "/s", caminho], check=True)
+    os.system("regsvr32 " + caminho + " /s")
     print(f'O arquivo {nome_dll} foi registrado\n')
 
 
