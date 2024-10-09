@@ -7,12 +7,9 @@ def copiar_e_registrar_dll(nome_dll, pasta_destino):
 
     if not os.path.exists(caminho):
         shutil.copy(nome_dll, caminho)
-        print(f'O arquivo {nome_dll} foi copiado para a pasta {pasta_destino}')
-    else:
-        print(f'O arquivo {nome_dll} ja existe na pasta {pasta_destino}')
 
-    os.system("regsvr32 " + caminho + " /s")
-    print(f'O arquivo {nome_dll} foi registrado\n')
+    os.system("regsvr32 " + caminho + " /s") # comando para registrar a dll
+    print(f'O arquivo {nome_dll} foi instalado na pasta {pasta_destino}')
 
 
 def main():
